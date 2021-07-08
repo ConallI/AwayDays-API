@@ -22,16 +22,24 @@ const typeDefs = gql`
 
   type Team {
     name: String!
-    sport: String
-    hometown: String
-    league: [String]
+    sport: Sport
+    hometown: City
+    league: [League]
+  }
+
+  type League {
+    name: String!
+  }
+
+  type Sport {
+    name: String!
   }
 
   type Query {
-    # getTeams: [Team]
+    getTeams: [Team]
     # getTeamsByCity: [Team]
     # getCities: [City]
-    getCityByTeam(name: String!): [City]
+    # getCityByTeam(name: String!): [City]
     # getCitiesBySpecialty(name: String!) [City]
   }
 
