@@ -4,6 +4,8 @@ const prisma = new PrismaClient();
 
 module.exports = {
   Query: {
-    info: () => `This is the API for Away Days`,
+    getCityByTeam: () => {
+      name: `This is the API for Away Days`;
+    },
   },
 };
