@@ -1,11 +1,21 @@
-const { PrismaClient } = require("@prisma/client");
-
-const prisma = new PrismaClient();
-
 module.exports = {
   Query: {
-    getCityByTeam: () => {
-      name: `This is the API for Away Days`;
+    getTeams: async (_parent, _args, context) => {
+      return context.prisma.team.findMany({
+        include: {
+          hometown: true,
+          league: {
+            select: {
+              name: true,
+            },
+          },
+          sport: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
     },
   },
 };
