@@ -6,12 +6,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+model City {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  specialties Specialty[]
+  sights      Sight[]
+  teams       Team[]
+  region      Region      @relation(fields: [regionId], references: [id])
+  regionId    String
+}
+
+model Specialty {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  City        City?   @relation(fields: [cityId], references: [id])
+  cityId      String?
+}
+
+model Sight {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  City        City?   @relation(fields: [cityId], references: [id])
+  cityId      String?
+}
+
+model Region {
+  id   String @id @default(uuid())
+  name String
+  City City[]
+}
+
+model Team {
+  id       String   @id @default(uuid())
+  name     String   @unique
+  hometown City?    @relation(fields: [cityId], references: [id])
+  sport    Sport?   @relation(fields: [sportId], references: [id])
+  league   League[]
+  cityId   String
+  sportId  String?
+}
+
+model League {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  Team   Team?   @relation(fields: [teamId], references: [id])
+  teamId String?
+}
+
+model Sport {
+  id   String @id @default(uuid())
+  name String @unique
+  Team Team[]
 }
