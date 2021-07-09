@@ -16,8 +16,12 @@ const typeDefs = gql`
     specialties: [Specialty]
     sights: [Sight]
     population: Int
-    region: [String]
+    region: Region
     teams: [Team]
+  }
+
+  type Region {
+    name: String!
   }
 
   type Team {
@@ -37,10 +41,9 @@ const typeDefs = gql`
 
   type Query {
     getTeams: [Team]
-    # getTeamsByCity: [Team]
-    # getCities: [City]
-    # getCityByTeam(name: String!): [City]
-    # getCitiesBySpecialty(name: String!) [City]
+    getCities: [City]
+    getTeamsByCity(name: String!): [Team]
+    getCityByTeam(name: String!): [City]
   }
 
   input SpecialtyInput {
