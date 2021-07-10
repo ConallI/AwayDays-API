@@ -6,24 +6,24 @@ Away-Days can help you plan your next away day.
 ## Queries
 
 **getTeams**
-returns all the teams in the database
+: returns all the teams in the database
 
 **getCities**
-returns all the cities in the database
+: returns all the cities in the database
 
 **getTeamsByCity**
-returns all the teams of a particular city
+: returns all the teams of a particular city
 
 ## Mutations
 
 **addSpecialty** 
-creates a new specialty, returns new specialty
+: creates a new specialty, returns new specialty
 
 **updateSpecialty**
-update info on an existing specialty, returns updated specialty
+: update info on an existing specialty, returns updated specialty
 
 **deleteSpecialty**
-Yep, you guessed it... (also returns the deleted specialty).
+: Yep, you guessed it... (also returns the deleted specialty).
 
 
 ### WIP
