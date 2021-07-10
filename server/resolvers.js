@@ -66,57 +66,38 @@ module.exports = {
     },
   },
   Mutation: {
-    // addCity: async (_parent, { input }, context) => {
-    //   console.log(input);
-    //   await context.prisma.city.create({
-    //     data: {
-    //       name: input.name,
-    //     },
-    //   });
-    // await context.prisma.city.create({
-    //   data: {
-    //     name: input.name,
-    //     specialties: {
-    //       create: [
-    //         {
-    //           name: input.specialties.name,
-    //           description: input.specialties.description,
-    //         },
-    //       ],
-    //     },
-    //     sights: {
-    //       create: [
-    //         {
-    //           name: input.sights.name,
-    //           description: input.sights.description,
-    //         },
-    //       ],
-    //     },
-    //     population: input.population,
-    //     region: {
-    //       create: [{ name: input.region.name }],
-    //     },
-    //     teams: {
-    //       create: [
-    //         {
-    //           name: input.teams.name,
-    //           sport: {
-    //             create: [{ name: input.teams.sport }],
-    //           },
-    //           league: {
-    //             create: [{ name: input.teams.league }],
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   },
-    // });
-    // return context.prisma.city.findUnique({
-    //   where: {
-    //     name: input.name,
-    //   },
-    // });
-    // },
+    addCity: async (_parent, args, context) => {
+      console.log(args.input);
+      const created = await context.prisma.city.create({
+        data: {
+          name: args.name,
+          specialties: {
+            create: [
+              {
+                name: args?.input?.specialties[0]?.name,
+                description: args?.input?.specialties[0]?.description,
+              },
+            ],
+          },
+          sights: {
+            create: [
+              {
+                name: args?.input?.sights[0]?.name,
+                description: args?.input?.sights[0]?.description,
+              },
+            ],
+          },
+          teams: {
+            create: [
+              {
+                name: args?.input?.teams[0]?.name,
+              },
+            ],
+          },
+        },
+      });
+      return created;
+    },
     addSpecialty: async (_parent, args, context) => {
       const created = await context.prisma.specialty.create({
         data: {

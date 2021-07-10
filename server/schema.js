@@ -5,7 +5,6 @@ const typeDefs = gql`
     name: String!
     specialties: [Specialty]
     sights: [Sight]
-    population: Int
     region: Region
     teams: [Team]
   }
@@ -46,11 +45,9 @@ const typeDefs = gql`
     getCityByTeam(name: String!): [City]
   }
 
-  input CityInput {
-    name: String!
+  input CityOptionalInput {
     specialties: [SpecialtyInput]
     sights: [SightInput]
-    population: Int
     region: RegionInput
     teams: [TeamInput]
   }
@@ -76,52 +73,16 @@ const typeDefs = gql`
     league: [String]
   }
 
-  input NewCity {
-    name: String!
-    specialties: [SpecialtyInput]
-    sights: [SightInput]
-    population: Int
-    region: RegionInput
-    teams: [TeamInput]
-  }
-
-  input BasicCity {
-    name: String!
-  }
-
-  input UpdateCity {
-    name: String
-    specialties: [SpecialtyInput]
-    sights: [SightInput]
-    population: Int
-    region: [String]
-    teams: [TeamInput]
-  }
-
-  input NewTeam {
-    name: String!
-    sport: String
-    hometown: String
-    league: [String]
-  }
-
   input UpdateSpecialty {
     name: String
     description: String
-  }
-
-  input UpdateTeam {
-    name: String
-    sport: String
-    hometown: String
-    league: [String]
   }
 
   type Mutation {
     #   addTeam(input: NewTeam!) Team
     #   updateTeam(name: String! input: UpdateTeam!) Team
     #   deleteTeam(name: String!) [Team]
-    # addCity(input: BasicCity!): City
+    addCity(name: String!, input: CityOptionalInput): City
     #   updateCity(name: String! input: UpdateCity!) City
     #   deleteCity(name: String!) [City]
     addSpecialty(name: String!, description: String): Specialty
