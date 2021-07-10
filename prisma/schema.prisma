@@ -16,13 +16,13 @@ model City {
   specialties Specialty[]
   sights      Sight[]
   teams       Team[]
-  region      Region      @relation(fields: [regionId], references: [id])
-  regionId    String
+  region      Region?      @relation(fields: [regionId], references: [id])
+  regionId    String?
 }
 
 model Specialty {
   id          String  @id @default(uuid())
-  name        String
+  name        String  @unique
   description String?
   City        City?   @relation(fields: [cityId], references: [id])
   cityId      String?
@@ -30,7 +30,7 @@ model Specialty {
 
 model Sight {
   id          String  @id @default(uuid())
-  name        String
+  name        String  @unique
   description String?
   City        City?   @relation(fields: [cityId], references: [id])
   cityId      String?
