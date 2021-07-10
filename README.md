@@ -1,6 +1,6 @@
 # Away-Days API
 
-Away-Days can help you plan your next away day.
+Away-Days can help you plan your next away day.\n
 *This was created during my time as a student at Code Chrysalis*
 
 ## Queries
