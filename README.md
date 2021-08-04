@@ -29,3 +29,4 @@ Away-Days can help you plan your next away day.
 
 ### WIP
 This API is incomplete.
+Next task: rewrite all JS in TS...
