@@ -1,39 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model City {
-  id          String      @id @default(uuid())
-  name        String      @unique
-  specialties Specialty[]
-  sights      Sight[]
-  teams       Team[]
-  region      Region?      @relation(fields: [regionId], references: [id])
-  regionId    String?
-}
-
-model Specialty {
-  id          String  @id @default(uuid())
-  name        String  @unique
-  description String?
-  City        City?   @relation(fields: [cityId], references: [id])
-  cityId      String?
-}
-
-model Sight {
-  id          String  @id @default(uuid())
-  name        String  @unique
-  description String?
-  City        City?   @relation(fields: [cityId], references: [id])
-  cityId      String?
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Region {
@@ -42,25 +13,51 @@ model Region {
   City City[]
 }
 
-model Team {
-  id       String   @id @default(uuid())
-  name     String   @unique
-  hometown City?    @relation(fields: [cityId], references: [id])
-  sport    Sport?   @relation(fields: [sportId], references: [id])
-  league   League[]
-  cityId   String
-  sportId  String?
+model City {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  regionId    String?
+  region      Region?     @relation(fields: [regionId], references: [id])
+  sights      Sight[]
+  specialties Specialty[]
+  teams       Team[]
 }
 
-model League {
-  id     String  @id @default(uuid())
-  name   String  @unique
-  Team   Team?   @relation(fields: [teamId], references: [id])
-  teamId String?
+model Specialty {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+  cityId      String?
+  City        City?   @relation(fields: [cityId], references: [id])
+}
+
+model Sight {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+  cityId      String?
+  City        City?   @relation(fields: [cityId], references: [id])
 }
 
 model Sport {
   id   String @id @default(uuid())
   name String @unique
   Team Team[]
+}
+
+model Team {
+  id       String   @id @default(uuid())
+  name     String   @unique
+  cityId   String?
+  sportId  String?
+  leagueId String?
+  hometown City?     @relation(fields: [cityId], references: [id])
+  sport    Sport?   @relation(fields: [sportId], references: [id])
+  league   League?  @relation(fields: [leagueId], references: [id])
+}
+
+model League {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  Team  Team[]
 }
