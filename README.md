@@ -90,8 +90,8 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 
 ## Current Tasks
 
-[ ] Add more endpoints.
-[ ] Dockerize.
-[ ] rewrite all JS in TS.
+- [ ] Add more endpoints.
+- [ ] Dockerize.
+- [ ] rewrite all JS in TS.
 
 This was created during my time as a student at Code Chrysalis.
