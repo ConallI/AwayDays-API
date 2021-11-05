@@ -27,7 +27,7 @@ const typeDefs = gql`
     name: String!
     sport: Sport
     hometown: City
-    league: [League]
+    league: League
   }
 
   type Sport {
@@ -41,15 +41,10 @@ const typeDefs = gql`
   type Query {
     getTeams: [Team]
     getCities: [City]
+    getTeamByName(name: String!): Team
     getTeamsByCity(name: String!): [Team]
-    getCityByTeam(name: String!): [City]
-  }
-
-  input CityOptionalInput {
-    specialties: [SpecialtyInput]
-    sights: [SightInput]
-    region: RegionInput
-    teams: [TeamInput]
+    getCityByName(name: String!): City
+    getCitiesByRegion(name: String!): [City]
   }
 
   input SpecialtyInput {
@@ -70,7 +65,7 @@ const typeDefs = gql`
     name: String!
     sport: String
     hometown: String
-    league: [String]
+    league: String
   }
 
   input UpdateSpecialty {
@@ -78,14 +73,18 @@ const typeDefs = gql`
     description: String
   }
 
+  input NewTeam {
+    name: String!
+  }
+
   type Mutation {
-    #   addTeam(input: NewTeam!) Team
-    #   updateTeam(name: String! input: UpdateTeam!) Team
-    #   deleteTeam(name: String!) [Team]
-    addCity(name: String!, input: CityOptionalInput): City
-    #   updateCity(name: String! input: UpdateCity!) City
-    #   deleteCity(name: String!) [City]
+    addRegion(name: String!): Region
+    addCity(name: String!): City
+    addSight(name: String!, description: String): Specialty
     addSpecialty(name: String!, description: String): Specialty
+    addTeam(name: String!): Team
+    addSport(name: String!): Sport
+    addLeague(name: String!): League
     updateSpecialty(name: String!, input: UpdateSpecialty!): Specialty
     deleteSpecialty(name: String!): Specialty
   }

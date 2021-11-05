@@ -1,9 +1,39 @@
-const { isConditionalExpression } = require("typescript");
-
 module.exports = {
   Query: {
     getTeams: async (_parent, _args, context) => {
       return context.prisma.team.findMany({
+        include: {
+          hometown: true,
+          league: true,
+          sport: true,
+        },
+      });
+    },
+    getTeamByName: async (_parent, { name }, context) => {
+      return context.prisma.team.findUnique({
+        where: {
+          name: name,
+        },
+        include: {
+          sport: true,
+          league: true,
+          hometown: {
+            include: {
+              region: true,
+              specialties: true,
+              sights: true,
+            },
+          },
+        },
+      });
+    },
+    getTeamsByCity: async (_parent, { name }, context) => {
+      return context.prisma.team.findMany({
+        where: {
+          hometown: {
+            name: name,
+          },
+        },
         include: {
           hometown: true,
           league: true,
@@ -26,35 +56,15 @@ module.exports = {
         },
       });
     },
-    getTeamsByCity: async (_parent, { name }, context) => {
-      return context.prisma.team.findMany({
-        where: {
-          hometown: {
-            name: name,
-          },
-        },
-        include: {
-          hometown: true,
-          league: true,
-          sport: true,
-        },
-      });
-    },
-    getCityByTeam: async (_parent, { name }, context) => {
+    getCityByName: async (_parent, { name }, context) => {
       return context.prisma.city.findUnique({
         where: {
-          teams: {
-            some: {
-              name: {
-                contains: name,
-              },
-            },
-          },
+          name: name,
         },
         include: {
+          region: true,
           specialties: true,
           sights: true,
-          region: true,
           teams: {
             include: {
               sport: true,
@@ -66,34 +76,18 @@ module.exports = {
     },
   },
   Mutation: {
-    addCity: async (_parent, args, context) => {
-      console.log(args.input);
+    addRegion: async (_parent, { name }, context) => {
+      const created = await context.prisma.region.create({
+        data: {
+          name: name,
+        },
+      });
+      return created;
+    },
+    addCity: async (_parent, { name }, context) => {
       const created = await context.prisma.city.create({
         data: {
-          name: args.name,
-          specialties: {
-            create: [
-              {
-                name: args?.input?.specialties[0]?.name,
-                description: args?.input?.specialties[0]?.description,
-              },
-            ],
-          },
-          sights: {
-            create: [
-              {
-                name: args?.input?.sights[0]?.name,
-                description: args?.input?.sights[0]?.description,
-              },
-            ],
-          },
-          teams: {
-            create: [
-              {
-                name: args?.input?.teams[0]?.name,
-              },
-            ],
-          },
+          name: name,
         },
       });
       return created;
@@ -103,6 +97,39 @@ module.exports = {
         data: {
           name: args.name,
           description: args.description,
+        },
+      });
+      return created;
+    },
+    addSight: async (_parent, args, context) => {
+      const created = await context.prisma.specialty.create({
+        data: {
+          name: args.name,
+          description: args.description,
+        },
+      });
+      return created;
+    },
+    addTeam: async (_parent, { name }, context) => {
+      const created = await context.prisma.team.create({
+        data: {
+          name: name,
+        },
+      });
+      return created;
+    },
+    addSport: async (_parent, { name }, context) => {
+      const created = await context.prisma.sport.create({
+        data: {
+          name: name,
+        },
+      });
+      return created;
+    },
+    addLeague: async (_parent, { name }, context) => {
+      const created = await context.prisma.league.create({
+        data: {
+          name: name,
         },
       });
       return created;
