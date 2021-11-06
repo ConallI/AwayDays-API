@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
+    "seed": "npx prisma db seed --preview-feature",
+    "migrate": "npx prisma migrate dev",
     "update": "npx prisma generate",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "test": "jest"
