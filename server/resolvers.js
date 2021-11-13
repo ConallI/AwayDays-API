@@ -102,7 +102,7 @@ module.exports = {
       return created;
     },
     addSight: async (_parent, args, context) => {
-      const created = await context.prisma.specialty.create({
+      const created = await context.prisma.sight.create({
         data: {
           name: args.name,
           description: args.description,
@@ -146,8 +146,28 @@ module.exports = {
       });
       return updated;
     },
+    updateSight: async (_parent, args, context) => {
+      const updated = await context.prisma.sight.update({
+        where: {
+          name: args.name,
+        },
+        data: {
+          name: args.input?.name,
+          description: args.input?.description,
+        },
+      });
+      return updated;
+    },
     deleteSpecialty: async (_parent, { name }, context) => {
       const deleted = await context.prisma.specialty.delete({
+        where: {
+          name: name,
+        },
+      });
+      return deleted;
+    },
+    deleteSight: async (_parent, { name }, context) => {
+      const deleted = await context.prisma.sight.delete({
         where: {
           name: name,
         },

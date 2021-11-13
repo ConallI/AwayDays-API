@@ -73,6 +73,11 @@ const typeDefs = gql`
     description: String
   }
 
+  input UpdateSight {
+    name: String
+    description: String
+  }
+
   input NewTeam {
     name: String!
   }
@@ -86,7 +91,9 @@ const typeDefs = gql`
     addSport(name: String!): Sport
     addLeague(name: String!): League
     updateSpecialty(name: String!, input: UpdateSpecialty!): Specialty
+    updateSight(name: String!, input: UpdateSight!): Sight
     deleteSpecialty(name: String!): Specialty
+    deleteSight(name: String!): Sight
   }
 `;
 
