@@ -36,62 +36,68 @@ async function seed() {
     console.log(`Created sport with id: ${seedSport.id}`);
   }
 
-  const vegalta = await prisma.team.update({
-    where: {
-      name: "Vegalta Sendai",
-    },
-    data: {
-      sport: {
-        connect: {
-          name: "Soccer",
+  const teams = [
+    "Avispa Fukuoka",
+    "Shonan Bellmare",
+    "Sanfrecce Hiroshima",
+    "Kashima Antlers",
+    "Kashiwa Reysol",
+    "Kawasaki Frontale",
+    "Vissel Kobe",
+    "Nagoya Grampus",
+    "Oita Trinita",
+    "Cerezo Osaka",
+    "Gamba Osaka",
+    "Urawa Reds",
+    "Hokkaido Consadole Sapporo",
+    "Shimizu S-Pulse",
+    "Vegalta Sendai",
+    "Tokushima Vortis",
+    "FC Tokyo",
+    "Sagan Tosu",
+    "Yokohama F. Marinos",
+    "Yokohama FC",
+  ];
+  teams.forEach(async (teamName) => {
+    const team = await prisma.team.update({
+      where: {
+        name: teamName,
+      },
+      data: {
+        sport: {
+          connect: {
+            name: "Soccer",
+          },
+        },
+        league: {
+          connect: {
+            name: "Meiji Yasuda J1 League",
+          },
         },
       },
-      league: {
-        connect: {
-          name: "Meiji Yasuda J1 League",
-        },
-      },
-    },
+    });
+    console.log(`Connected ${team.name} to sport and league tables`);
   });
-  console.log(`Connected ${vegalta.name} to sport and league tables`);
 
-  const sanfrecce = await prisma.team.update({
-    where: {
-      name: "Sanfrecce Hiroshima",
-    },
-    data: {
-      sport: {
-        connect: {
-          name: "Soccer",
+  const cities = [
+    ["Hiratsuka", "Kanagawa"],
+    ["Yokohama", "Kanagawa"],
+  ];
+  cities.forEach(async (cityRegion) => {
+    const cityToRegion = await prisma.city.update({
+      where: {
+        name: cityRegion[0],
+      },
+      data: {
+        region: {
+          connect: {
+            name: cityRegion[1],
+          },
         },
       },
-      league: {
-        connect: {
-          name: "Meiji Yasuda J1 League",
-        },
-      },
-    },
+    });
+    console.log(`Connected ${cityToRegion.name} to region table`);
   });
-  console.log(`Connected ${sanfrecce.name} to sport and league tables`);
-
-  const fcTokyo = await prisma.team.update({
-    where: {
-      name: "FC Tokyo",
-    },
-    data: {
-      sport: {
-        connect: {
-          name: "Soccer",
-        },
-      },
-      league: {
-        connect: {
-          name: "Meiji Yasuda J1 League",
-        },
-      },
-    },
-  });
-  console.log(`Connected ${fcTokyo.name} to sport and league tables`);
 
   console.log(`Seeding finished.`);
 }
