@@ -29,7 +29,8 @@ export const cityData: Prisma.CityCreateInput[] = [
     },
     region: {
       create: {
-        name: "Miyagi, Japan",
+        name: "Miyagi",
+        country: "Japan",
       },
     },
   },
@@ -62,7 +63,8 @@ export const cityData: Prisma.CityCreateInput[] = [
     },
     region: {
       create: {
-        name: "Hiroshima, Japan",
+        name: "Hiroshima",
+        country: "Japan",
       },
     },
   },
@@ -90,7 +92,8 @@ export const cityData: Prisma.CityCreateInput[] = [
     },
     region: {
       create: {
-        name: "Tokyo, Japan",
+        name: "Tokyo",
+        country: "Japan",
       },
     },
   },

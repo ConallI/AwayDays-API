@@ -21,6 +21,7 @@ const typeDefs = gql`
 
   type Region {
     name: String!
+    country: String!
   }
 
   type Team {
@@ -59,6 +60,7 @@ const typeDefs = gql`
 
   input RegionInput {
     name: String
+    country: String
   }
 
   input TeamInput {
@@ -83,7 +85,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addRegion(name: String!): Region
+    addRegion(name: String!, country: String!): Region
     addCity(name: String!): City
     addSight(name: String!, description: String): Specialty
     addSpecialty(name: String!, description: String): Specialty
