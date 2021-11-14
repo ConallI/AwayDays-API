@@ -10,7 +10,7 @@ datasource db {
 model Region {
   id   String @id @default(uuid())
   name String @unique
-  country String
+  country String?
   City City[]
 }
 
