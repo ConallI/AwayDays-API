@@ -81,12 +81,23 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 ### updateSpecialty
 
 **updateSpecialty(name: String!, input: UpdateSpecialty!): Specialty**
-: Updates info of an existing specialty based on input data, returns updated specialty
+: Updates info of an existing specialty based on input data, returns updated specialty.
+
+### updateSight
+
+**updateSight(name: String!, input: UpdateSight!): Sight**
+: Updates info of an existing sight based on input data, returns updated sight.
+
 
 ### deleteSpecialty
 
 **deleteSpecialty(name: String!): Specialty**
-: Yep, you guessed it... (also returns the deleted specialty).
+: Deletes specialty from the db based on given name, returns deleted specialty.
+
+### deleteSight
+
+**deleteSight(name: String!): Sight**
+: Yep, you guessed it... (also returns the deleted sight).
 
 ## Get Started 
 
@@ -100,6 +111,5 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 ## Current Tasks
 
 - [ ] Add more endpoints.
-- [ ] rewrite all JS in TS.
 
-This was created during my time as a student at Code Chrysalis.
+This was started during my time as a student at Code Chrysalis.
