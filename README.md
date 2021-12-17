@@ -88,14 +88,15 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 **deleteSpecialty(name: String!): Specialty**
 : Yep, you guessed it... (also returns the deleted specialty).
 
-## Get Started 
+## Get Started
 
- - Clone this repository.
- - In the terminal run _docker-compose build_ to build the server and db containers.
- - run _docker-compose up -d_ to run both containers.
- - run _docker exec -ti <app-container-name-here> npm run migrate_ to initialize the db with the current migrations.
- - run _docker exec -ti <app-container-name-here> npm run seed_ to seed the db with initial data.
- - When you are finished, run _docker-compose down_ to stop and remove the containers.
+- Clone this repository.
+- Run `sh start.sh` in the terminal to get started. This will run the following...
+  - run `docker-compose build` to build the server and db containers.
+  - run `docker-compose up -d` to run both containers in detached mode.
+  - run `docker exec -ti <app-container-name-here> npm run migrate` to initialize the db with the current migrations.
+  - run `docker exec -ti <app-container-name-here> npm run seed` to seed the db with initial data.
+- When you are finished, use `docker-compose down` to stop and remove the containers.
 
 ## Current Tasks
 
