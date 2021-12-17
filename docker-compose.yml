@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   postgres:
+    container_name: awaydays-api_postgres
     image: postgres
     environment:
       - POSTGRES_USER=away-days
@@ -9,6 +10,7 @@ services:
     ports:
       - "5432:5432"
   app:
+    container_name: awaydays-api_app
     build:
       context: .
       dockerfile: Dockerfile.dev
