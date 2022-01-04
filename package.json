@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
+    "build": "bash start.sh",
     "seed": "npx prisma db seed",
     "migrate": "npx prisma migrate dev",
     "update": "npx prisma generate",
