@@ -88,7 +88,6 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 **updateSight(name: String!, input: UpdateSight!): Sight**
 : Updates info of an existing sight based on input data, returns updated sight.
 
-
 ### deleteSpecialty
 
 **deleteSpecialty(name: String!): Specialty**
@@ -102,7 +101,7 @@ It is built using GraphQL, Apollo, Prisma and Postgres.
 ## Get Started
 
 - Clone this repository.
-- Run `sh start.sh` in the terminal to get started. This will run the following...
+- Run `npm run build` in the terminal to get started. This will use the `start.sh` script to run the following...
   - run `docker-compose build` to build the server and db containers.
   - run `docker-compose up -d` to run both containers in detached mode.
   - run `docker exec -ti <app-container-name-here> npm run migrate` to initialize the db with the current migrations.
